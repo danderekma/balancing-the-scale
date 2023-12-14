@@ -11,16 +11,21 @@ import {
   ActionIcon,
   Text,
   Blockquote,
-  Space
+  Space,
+  Tabs,
+  NumberInput
 } from "@mantine/core";
 import {
   IconScale,
   IconBrandGithub,
   IconSun,
   IconMoonStars,
-  IconZoomQuestion
+  IconZoomQuestion,
+  IconBolt,
+  IconRipple
 } from "@tabler/icons-react";
 import styles from "./page.module.css";
+import { Tex } from "tabler-icons-react";
 
 export default function Home() {
   const router = useRouter();
@@ -90,7 +95,7 @@ export default function Home() {
             radius="lg"
             iconSize={42}
             icon={<IconZoomQuestion />}
-            m="xl"
+            m="lg"
           >
             <Text fs="italic">
               To what extent has the development, deployment, and maintenance of
@@ -115,7 +120,84 @@ export default function Home() {
           <Title order={2} lh="xl">
             Atlas of AI
           </Title>
-          <Text>“Atlas of AI” by Kate Crawford</Text>
+          <Text>
+            “Atlas of AI” by Kate Crawford provides a critical and comprehensive
+            examination of artificial intelligence’s social, political, and
+            economic impacts. She argues in her work that AI technologies must
+            not simply be seen as innovative tools but also as an incredibly
+            intricate and complex system that involves the utilization of
+            natural and human resources. So much so that without such
+            involvement, these systems would not be able to exist or function in
+            any meaningful way.
+          </Text>
+          <Space h="lg" />
+          <Text>
+            We will primarily focus on the environmental aspects of Crawford’s
+            critique.
+          </Text>
+          <Space h="lg" />
+          <Title order={2} lh="xl">
+            Visualization
+          </Title>
+          <Text>
+            The following visualization tool provides a rough estimate of
+            ChatGPT’s energy and water expenditures in real time starting from
+            when the user loads the page.
+          </Text>
+          <Space h="lg" />
+          <Tabs color="green" defaultValue="energy">
+            <Tabs.List>
+              <Tabs.Tab value="energy" leftSection={<IconBolt size={20} />}>
+                Energy
+              </Tabs.Tab>
+              <Tabs.Tab value="water" leftSection={<IconRipple size={20} />}>
+                Water
+              </Tabs.Tab>
+            </Tabs.List>
+
+            <Tabs.Panel value="energy" p="lg">
+              <Title order={3} lh="xl">
+                Energy
+              </Title>
+              <Text>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam
+                eos odio perspiciatis saepe officiis consequatur adipisci et,
+                nesciunt obcaecati aut officia minima nisi possimus inventore
+                esse recusandae animi. Ratione, id.
+              </Text>
+              <Space h="md" />
+              <Container size={300}>
+                <NumberInput
+                  readOnly
+                  thousandSeparator
+                  value={30000}
+                  styles={{
+                    label: {
+                      width: "100%",
+                      textAlign: "center"
+                    },
+                    input: {
+                      textAlign: "center"
+                    }
+                  }}
+                  label="Hello"
+                />
+              </Container>
+              <Space h="md" />
+            </Tabs.Panel>
+            <Tabs.Panel value="water" p="lg">
+              Second panel
+            </Tabs.Panel>
+          </Tabs>
+          <Title order={2} lh="xl">
+            Takeaway
+          </Title>
+          <Text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+            repudiandae debitis in quasi unde. Cumque eos, nostrum similique
+            qui, vero laboriosam maxime iure laudantium quis odio debitis quod
+            sunt! Id!
+          </Text>
         </Container>
       </AppShell.Main>
     </AppShell>
