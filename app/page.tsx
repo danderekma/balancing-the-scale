@@ -181,7 +181,26 @@ export default function Home() {
           <Space h="lg" />
           <Text>
             We will primarily focus on the environmental aspects of Crawford’s
-            critique.
+            critique. In the chapter named “Earth”, Crawford highlights the
+            undeniable connection between the origins of Silicon Valley and by
+            extension the tech scene in Northern California and the extraction
+            of minerals such as lithium in nearby mines, many of which have been
+            depleted of its resources. She also emphasizes the importance of
+            these metals and minerals as an integral part of the development and
+            deployment of AI systems as, for example, “rechargeable lithium-ion
+            batteries are essential for mobile devices and laptops, in-home
+            digital assistants, and data center backup power”. More importantly,
+            Crawford emphasizes the idea that the ignorance of the supply chain
+            is woven into the fabrics of capitalism and the there exists a
+            strong sense of deniability of unsustainable and harmful extraction
+            practices on the part of many large tech companies. Worse still,
+            these issues extend beyond being purely domestic. Similar patterns
+            of extraction have been identified in China, Indonesia, and the
+            Republic of the Congo as companies move their supply chains
+            overseas. Crawford’s dialogue on the environmental detriments AI
+            systems produce portrays a incredibly thought-evoking narrative
+            behind the highly innovative and attractive facade tech companies
+            characterize their products with.
           </Text>
           <Space h="lg" />
           <Title order={2} lh="xl">
