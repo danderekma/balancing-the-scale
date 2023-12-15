@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   useMantineColorScheme,
@@ -20,18 +19,17 @@ import {
 } from "@mantine/core";
 import {
   IconScale,
-  IconBrandGithub,
   IconSun,
   IconMoonStars,
   IconZoomQuestion,
   IconBolt,
   IconRipple,
-  IconHome
+  IconHome,
+  IconBucket
 } from "@tabler/icons-react";
 import styles from "./page.module.css";
 import { Consumption } from "../types/Consumption";
 import { IconCount } from "../types/IconCount";
-import { Bulb } from "tabler-icons-react";
 
 const initialConsumption: Consumption = {
   energy: 0,
@@ -47,11 +45,10 @@ export default function Home() {
   const [consumption, setConsumption] =
     useState<Consumption>(initialConsumption);
   const [iconCount, setIconCount] = useState<IconCount>(initialIconCount);
-  const router = useRouter();
   const { toggleColorScheme } = useMantineColorScheme();
 
   useEffect(() => {
-    const consumptionIntervalID = setInterval(() => {
+    const energyCounter = setInterval(() => {
       setConsumption(
         (currConsumption: Consumption): Consumption => ({
           ...currConsumption,
@@ -59,7 +56,15 @@ export default function Home() {
         })
       );
     }, 100);
-    const iconIntervalID = setInterval(() => {
+    const waterCounter = setInterval(() => {
+      setConsumption(
+        (currConsumption: Consumption): Consumption => ({
+          ...currConsumption,
+          water: currConsumption.water + 0.3
+        })
+      );
+    }, 100);
+    const energyIcon = setInterval(() => {
       setIconCount(
         (currIconCount: IconCount): IconCount => ({
           ...currIconCount,
@@ -67,9 +72,19 @@ export default function Home() {
         })
       );
     }, 3000);
+    const waterIcon = setInterval(() => {
+      setIconCount(
+        (currIconCount: IconCount): IconCount => ({
+          ...currIconCount,
+          water: currIconCount.water + 1
+        })
+      );
+    }, 1635);
     return () => {
-      clearInterval(consumptionIntervalID);
-      clearInterval(iconIntervalID);
+      clearInterval(energyCounter);
+      clearInterval(waterCounter);
+      clearInterval(energyIcon);
+      clearInterval(waterIcon);
     };
   }, []);
 
@@ -93,15 +108,6 @@ export default function Home() {
           <IconScale size={40} />
         </Container>
         <Flex justify="end" align="center" p={16} gap={16}>
-          <ActionIcon
-            size="xl"
-            variant="default"
-            onClick={() =>
-              router.push("https://github.com/danderekma/balancing-the-scale")
-            }
-          >
-            <IconBrandGithub />
-          </ActionIcon>
           <ActionIcon size="xl" variant="default" onClick={toggleColorScheme}>
             <IconSun className={styles.light} />
             <IconMoonStars className={styles.dark} />
@@ -253,8 +259,8 @@ export default function Home() {
                 </Link>
               </Text>
               <Space h="lg" />
-              <ScrollArea h={500} type="always" scrollbars="y">
-                <SimpleGrid cols={30} px="md">
+              <ScrollArea h={400} type="always" scrollbars="y" p="md">
+                <SimpleGrid cols={20}>
                   {new Array(iconCount.energy).fill(<IconHome />)}
                 </SimpleGrid>
               </ScrollArea>
@@ -274,7 +280,7 @@ export default function Home() {
                 <NumberInput
                   readOnly
                   thousandSeparator
-                  value={consumption.water}
+                  value={consumption.water.toFixed(1)}
                   styles={{
                     label: {
                       width: "100%",
@@ -289,15 +295,24 @@ export default function Home() {
                     }
                   }}
                   label="Water Consumption"
-                  description="Consumption measured in "
+                  description="Consumption measured in gal"
                 />
               </Container>
               <Space h="lg" />
-              <Text>The following is a depiction</Text>
+              <Text>
+                The following is a live depiction of ChatGPT’s water
+                consumption, with each{" "}
+                <IconBucket
+                  style={{
+                    verticalAlign: "middle"
+                  }}
+                />{" "}
+                representing a 5-gallon bucket.
+              </Text>
               <Space h="lg" />
-              <ScrollArea h={500} type="always" scrollbars="y">
-                <SimpleGrid cols={30} px="md">
-                  {new Array(consumption.water).fill(<Bulb />)}
+              <ScrollArea h={400} type="always" scrollbars="y" p="md">
+                <SimpleGrid cols={20}>
+                  {new Array(iconCount.water).fill(<IconBucket />)}
                 </SimpleGrid>
               </ScrollArea>
             </Tabs.Panel>
