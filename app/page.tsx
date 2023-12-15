@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -13,7 +14,9 @@ import {
   Blockquote,
   Space,
   Tabs,
-  NumberInput
+  NumberInput,
+  SimpleGrid,
+  ScrollArea
 } from "@mantine/core";
 import {
   IconScale,
@@ -22,14 +25,53 @@ import {
   IconMoonStars,
   IconZoomQuestion,
   IconBolt,
-  IconRipple
+  IconRipple,
+  IconHome
 } from "@tabler/icons-react";
 import styles from "./page.module.css";
-import { Tex } from "tabler-icons-react";
+import { Consumption } from "../types/consumption";
+import { IconCount } from "../types/iconCount";
+import { Bulb } from "tabler-icons-react";
+
+const initialConsumption: Consumption = {
+  energy: 0,
+  water: 0
+};
+
+const initialIconCount: IconCount = {
+  energy: 0,
+  water: 0
+};
 
 export default function Home() {
+  const [consumption, setConsumption] =
+    useState<Consumption>(initialConsumption);
+  const [iconCount, setIconCount] = useState<IconCount>(initialIconCount);
   const router = useRouter();
   const { toggleColorScheme } = useMantineColorScheme();
+
+  useEffect(() => {
+    const consumptionIntervalID = setInterval(() => {
+      setConsumption(
+        (currConsumption: Consumption): Consumption => ({
+          ...currConsumption,
+          energy: currConsumption.energy + 1
+        })
+      );
+    }, 100);
+    const iconIntervalID = setInterval(() => {
+      setIconCount(
+        (currIconCount: IconCount): IconCount => ({
+          ...currIconCount,
+          energy: currIconCount.energy + 1
+        })
+      );
+    }, 3000);
+    return () => {
+      clearInterval(consumptionIntervalID);
+      clearInterval(iconIntervalID);
+    };
+  }, []);
 
   return (
     <AppShell>
@@ -160,6 +202,68 @@ export default function Home() {
                 Energy
               </Title>
               <Text>
+                With hundreds of millions of daily queries, a University of
+                Washington assistant professor of electrical and computer
+                engineering,{" "}
+                <Link href="https://people.ece.uw.edu/moazeni_sajjad/?_gl=1*10jft81*_ga*MTU1NDU5NTc2MC4xNzAyNjAzODQx*_ga_JLHM9WH4JV*MTcwMjYwMzg0MC4xLjAuMTcwMjYwMzg0My4wLjAuMA..*_ga_3T65WK0BM8*MTcwMjYwMzg0MC4xLjAuMTcwMjYwMzg0My4wLjAuMA..">
+                  Sajjad Moazeni
+                </Link>
+                , estimates{" "}
+                <Link href="https://www.washington.edu/news/2023/07/27/how-much-energy-does-chatgpt-use/">
+                  this many queries can cost around 1 GWh each day
+                </Link>
+                .
+              </Text>
+              <Space h="md" />
+              <Container size={300}>
+                <NumberInput
+                  readOnly
+                  thousandSeparator
+                  value={consumption.energy}
+                  styles={{
+                    label: {
+                      width: "100%",
+                      textAlign: "center"
+                    },
+                    description: {
+                      width: "100%",
+                      textAlign: "center"
+                    },
+                    input: {
+                      textAlign: "center"
+                    }
+                  }}
+                  label="Electricity Consumption"
+                  description="Consumption measured in kWh"
+                />
+              </Container>
+              <Space h="lg" />
+              <Text>
+                The following is a live depiction of ChatGPT’s energy
+                consumption, with each{" "}
+                <IconHome
+                  style={{
+                    verticalAlign: "middle"
+                  }}
+                />{" "}
+                representing the amount of energy spent by an average American
+                household per day.{" "}
+                <Link href="https://www.eia.gov/tools/faqs/faq.php?id=97&t=3">
+                  (29 kWh)
+                </Link>
+              </Text>
+              <Space h="lg" />
+              <ScrollArea h={500} type="always" scrollbars="y">
+                <SimpleGrid cols={30} px="md">
+                  {new Array(iconCount.energy).fill(<IconHome />)}
+                </SimpleGrid>
+              </ScrollArea>
+            </Tabs.Panel>
+            <Tabs.Panel value="water" p="lg">
+              <Title order={3} lh="xl">
+                Water
+              </Title>
+              <Text>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam
                 eos odio perspiciatis saepe officiis consequatur adipisci et,
                 nesciunt obcaecati aut officia minima nisi possimus inventore
@@ -170,9 +274,13 @@ export default function Home() {
                 <NumberInput
                   readOnly
                   thousandSeparator
-                  value={30000}
+                  value={consumption.water}
                   styles={{
                     label: {
+                      width: "100%",
+                      textAlign: "center"
+                    },
+                    description: {
                       width: "100%",
                       textAlign: "center"
                     },
@@ -180,24 +288,31 @@ export default function Home() {
                       textAlign: "center"
                     }
                   }}
-                  label="Hello"
+                  label="Water Consumption"
+                  description="Consumption measured in "
                 />
               </Container>
-              <Space h="md" />
-            </Tabs.Panel>
-            <Tabs.Panel value="water" p="lg">
-              Second panel
+              <Space h="lg" />
+              <Text>The following is a depiction</Text>
+              <Space h="lg" />
+              <ScrollArea h={500} type="always" scrollbars="y">
+                <SimpleGrid cols={30} px="md">
+                  {new Array(consumption.water).fill(<Bulb />)}
+                </SimpleGrid>
+              </ScrollArea>
             </Tabs.Panel>
           </Tabs>
+          <Space h="md" />
           <Title order={2} lh="xl">
             Takeaway
           </Title>
           <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
-            repudiandae debitis in quasi unde. Cumque eos, nostrum similique
-            qui, vero laboriosam maxime iure laudantium quis odio debitis quod
-            sunt! Id!
+            This project aims to acknowledge the innovative and attractive
+            nature of many modern technologies/products but also spread
+            awareness regarding their plentiful impacts, especially
+            environmental.
           </Text>
+          <Space h={100} />
         </Container>
       </AppShell.Main>
     </AppShell>
