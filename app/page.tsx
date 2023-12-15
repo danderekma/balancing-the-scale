@@ -269,6 +269,7 @@ export default function Home() {
                 type="always"
                 scrollbars="y"
                 p="md"
+                mx="md"
               >
                 <SimpleGrid cols={20}>
                   {new Array(iconCount.energy).fill(<IconHome />)}
@@ -339,6 +340,7 @@ export default function Home() {
                 type="always"
                 scrollbars="y"
                 p="md"
+                mx="md"
               >
                 <SimpleGrid cols={20}>
                   {new Array(iconCount.water).fill(<IconBucket />)}
