@@ -188,7 +188,7 @@ export default function Home() {
             Visualization
           </Title>
           <Text>
-            The following visualization tool provides a rough estimate of
+            The following visualization tool aims to provide a rough estimate of
             ChatGPT’s energy and water expenditures in real time starting from
             when the user loads the page.
           </Text>
@@ -259,21 +259,40 @@ export default function Home() {
                 </Link>
               </Text>
               <Space h="lg" />
-              <ScrollArea h={400} type="always" scrollbars="y" p="md">
+              <ScrollArea.Autosize
+                style={{
+                  border: "1px solid #ced4da",
+                  borderRadius: 5
+                }}
+                mih={60}
+                mah={400}
+                type="always"
+                scrollbars="y"
+                p="md"
+              >
                 <SimpleGrid cols={20}>
                   {new Array(iconCount.energy).fill(<IconHome />)}
                 </SimpleGrid>
-              </ScrollArea>
+              </ScrollArea.Autosize>
             </Tabs.Panel>
             <Tabs.Panel value="water" p="lg">
               <Title order={3} lh="xl">
                 Water
               </Title>
               <Text>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam
-                eos odio perspiciatis saepe officiis consequatur adipisci et,
-                nesciunt obcaecati aut officia minima nisi possimus inventore
-                esse recusandae animi. Ratione, id.
+                <Link href="https://shaoleiren.github.io/">Shaolei Ren</Link>,
+                an Associate Professor of Electrical and Computer Engineering
+                with the University of California, Riverside, estimated in his
+                paper titled{" "}
+                <Link href="https://arxiv.org/abs/2304.03271">
+                  “Making AI Less “Thirsty”: Uncovering and Addressing the
+                  Secret Water Footprint of AI Models”
+                </Link>{" "}
+                that ChatGPT utilizes roughly 500 milliliters of water for a
+                series of between 5 to 50 prompts. For the water visualizations
+                below, we utilized an estimate of 100 million queries/prompts
+                per day to provide an uniform comparison with the energy
+                visualizations.
               </Text>
               <Space h="md" />
               <Container size={300}>
@@ -310,11 +329,21 @@ export default function Home() {
                 representing a 5-gallon bucket.
               </Text>
               <Space h="lg" />
-              <ScrollArea h={400} type="always" scrollbars="y" p="md">
+              <ScrollArea.Autosize
+                style={{
+                  border: "1px solid #ced4da",
+                  borderRadius: 5
+                }}
+                mih={60}
+                mah={400}
+                type="always"
+                scrollbars="y"
+                p="md"
+              >
                 <SimpleGrid cols={20}>
                   {new Array(iconCount.water).fill(<IconBucket />)}
                 </SimpleGrid>
-              </ScrollArea>
+              </ScrollArea.Autosize>
             </Tabs.Panel>
           </Tabs>
           <Space h="md" />
@@ -322,10 +351,16 @@ export default function Home() {
             Takeaway
           </Title>
           <Text>
-            This project aims to acknowledge the innovative and attractive
-            nature of many modern technologies/products but also spread
-            awareness regarding their plentiful impacts, especially
-            environmental.
+            It is important to recognize that the goal of this project is not to
+            undermine the efforts and time many tech companies such as OpenAI
+            have put forth into developing and producing these innovative
+            products and technologies. This project does, however, aim to spread
+            awareness and engage dialogue within the tech community regarding
+            the environmental impacts these products may carry. If you’ve
+            happened to stumble across this page, I highly urge you to apply the
+            knowledge you’ve acquired in the aforementioned manner so that we
+            may hope to balance the scale between pursuing innovation and saving
+            our home.
           </Text>
           <Space h={100} />
         </Container>
