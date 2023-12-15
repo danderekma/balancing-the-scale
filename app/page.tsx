@@ -29,8 +29,8 @@ import {
   IconHome
 } from "@tabler/icons-react";
 import styles from "./page.module.css";
-import { Consumption } from "../types/consumption";
-import { IconCount } from "../types/iconCount";
+import { Consumption } from "../types/Consumption";
+import { IconCount } from "../types/IconCount";
 import { Bulb } from "tabler-icons-react";
 
 const initialConsumption: Consumption = {
