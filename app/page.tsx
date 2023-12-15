@@ -169,14 +169,16 @@ export default function Home() {
             Atlas of AI
           </Title>
           <Text>
-            “Atlas of AI” by Kate Crawford provides a critical and comprehensive
-            examination of artificial intelligence’s social, political, and
-            economic impacts. She argues in her work that AI technologies must
-            not simply be seen as innovative tools but also as an incredibly
-            intricate and complex system that involves the utilization of
-            natural and human resources. So much so that without such
-            involvement, these systems would not be able to exist or function in
-            any meaningful way.
+            <Link href="https://www.katecrawford.net/index.html">
+              “Atlas of AI”
+            </Link>{" "}
+            by Kate Crawford provides a critical and comprehensive examination
+            of artificial intelligence’s social, political, and economic
+            impacts. She argues in her work that AI technologies must not simply
+            be seen as innovative tools but also as an incredibly intricate and
+            complex system that involves the utilization of natural and human
+            resources. So much so that without such involvement, these systems
+            would not be able to exist or function in any meaningful way.
           </Text>
           <Space h="lg" />
           <Text>
